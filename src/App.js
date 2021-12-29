@@ -1,23 +1,122 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Switch, Route } from 'react-router-dom';
+import { checkUserSession } from './redux/User/user.actions';
 
-function App() {
+//components
+import AdminToolbar from './Components/AdminToolbar';
+
+//hoc
+import WithAuth from './hoc/WithAuth';
+import WithAdminAuth from './hoc/WithAdminAuth';
+
+//layout
+import MainLayout from './Layouts/MainLayout'
+import HomepageLayout from './Layouts/HomepageLayout';
+import AdminLayout from './Layouts/AdminLayout';
+import DashboardLayout from './Layouts/DashboardLayout';
+
+//pages
+import Homepage from './pages/Homepage';
+import Search from './pages/Search';
+import Registration from './pages/Registration';
+import Login from './pages/Login';
+import Recovery from './pages/Recovery';
+import Dashboard from './pages/Dashboard';
+import Admin from './pages/Admin';
+import ProductDetails from './pages/ProductDetails';
+import Cart from './pages/Cart';
+import Payment from './pages/Payment';
+
+import './default.scss';
+
+
+
+const App = props => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(checkUserSession());
+  }, []);
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AdminToolbar />
+      <Switch>
+        <Route exact path="/" render={() => (
+          <HomepageLayout>
+            <Homepage />
+          </HomepageLayout>
+        )} />
+
+        <Route exact path="/search" render={() => (
+          <MainLayout>
+            <Search />
+          </MainLayout>
+        )} />
+
+        <Route path="/search/:filterType" render={() => (
+          <MainLayout>
+            <Search />
+          </MainLayout>
+        )} />
+
+        <Route path="/product/:productID" render={() => (
+          <MainLayout>
+            <ProductDetails />
+          </MainLayout>
+        )} />
+
+        <Route path="/cart" render={() => (
+          <MainLayout>
+            <Cart />
+          </MainLayout>
+        )} />
+
+        <Route path="/payment" render={() => (
+          <WithAuth>
+            <MainLayout>
+             <Payment />
+            </MainLayout>
+          </WithAuth>
+        )} />
+
+        <Route path="/registration" render={() => (
+          <MainLayout>
+            <Registration />
+          </MainLayout>
+        )} />
+
+        <Route path="/login"
+          render={() => (
+            <MainLayout>
+              <Login />
+            </MainLayout>
+          )} />
+
+        <Route path="/recovery" render={() => (
+          <MainLayout>
+            <Recovery />
+          </MainLayout>
+        )} />
+        <Route path="/dashboard" render={() => (
+          <WithAuth>
+            <DashboardLayout>
+              <Dashboard />
+            </DashboardLayout>
+          </WithAuth>
+        )} />
+
+        <Route path="/admin" render={() => (
+          <WithAdminAuth>
+            <AdminLayout>
+              <Admin />
+            </AdminLayout>
+          </WithAdminAuth>
+        )} />
+
+      </Switch>
     </div>
   );
 }
