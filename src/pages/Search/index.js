@@ -1,7 +1,7 @@
 import React from "react";
 import ProductResults from "../../Components/ProductResults";
 
-const Search = ({ }) => {
+const Search = () => {
     return (
         <div className="searchPage">
             <ProductResults />
