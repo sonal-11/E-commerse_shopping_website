@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { CardElement, useElements } from "@stripe/react-stripe-js";
+import { CardElement} from "@stripe/react-stripe-js";
 import { CountryDropdown } from "react-country-region-selector";
-import { useDispatch } from "react-redux";
-import { clearCart } from "../../redux/Cart/cart.actions";
+// import { useDispatch } from "react-redux";
+// import { clearCart } from "../../redux/Cart/cart.actions";
 import FormInput from "../form/FormInput";
 import Button from "../form/Button";
 import "./style.scss";
@@ -17,8 +17,8 @@ const initialAddressState = {
 };
 
 const PaymentDetails = () => {
-    const dispatch = useDispatch();
-  const elements = useElements();
+    // const dispatch = useDispatch();
+  // const elements = useElements();
   const [billingAddress, setBillingAddress] = useState({
     ...initialAddressState,
   });
@@ -46,7 +46,7 @@ const PaymentDetails = () => {
 
   const handleFormSubmit = async (evt) => {
     evt.preventDefault();
-    const CardElement = elements.getElement("card");
+    // const CardElement = elements.getElement("card");
 
     if (
       !shippingAddress.line1 ||
@@ -75,6 +75,8 @@ const PaymentDetails = () => {
     },
     hidePostalCode: true,
   };
+
+  
 
   return (
     <div className="paymentDetails">

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory,useParams } from 'react-router-dom';
+import { useHistory, useParams } from "react-router-dom";
 import { fetchProductsStart } from "../../redux/Products/products.actions";
 import FormSelect from "../form/FormSelect";
 import LoadMore from "../LoadMore";
@@ -11,20 +11,17 @@ const mapState = ({ productsData }) => ({
   products: productsData.products,
 });
 
-const ProductResults = ({ }) => {
+const ProductResults = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { filterType } = useParams();
   const { products } = useSelector(mapState);
 
-  const {data,queryDoc,isLastPage} = products;
-  
+  const { data, queryDoc, isLastPage } = products;
 
   useEffect(() => {
-    dispatch(
-      fetchProductsStart( {filterType})
-    )
-  }, [filterType]);
+    dispatch(fetchProductsStart({ filterType }));
+  }, [dispatch, filterType]);
 
   const handleFilter = (e) => {
     const nextFilter = e.target.value;
@@ -42,27 +39,31 @@ const ProductResults = ({ }) => {
 
   const configFilters = {
     defaultValue: filterType,
-    options: [{
-      name: 'Show all',
-      value:''
-    }, {
-      name: 'Mens',
-      value:'mens'
-    },{
-      name: 'Womens',
-      value: 'womens'
-    }],
-    handleChange: handleFilter
+    options: [
+      {
+        name: "Show all",
+        value: "",
+      },
+      {
+        name: "Mens",
+        value: "mens",
+      },
+      {
+        name: "Womens",
+        value: "womens",
+      },
+    ],
+    handleChange: handleFilter,
   };
 
   const handleLoadMore = () => {
     dispatch(
       fetchProductsStart({
         filterType,
-        startAfterDoc:queryDoc,
-        persistProducts: data
+        startAfterDoc: queryDoc,
+        persistProducts: data,
       })
-    )
+    );
   };
 
   const configLoadMore = {
@@ -71,8 +72,6 @@ const ProductResults = ({ }) => {
 
   return (
     <div className="products">
-
-
       <h1>Browse Products</h1>
 
       <FormSelect {...configFilters} />
@@ -84,25 +83,19 @@ const ProductResults = ({ }) => {
           if (
             !productThumbnail ||
             !productName ||
-            typeof productPrice === 'undefined'
+            typeof productPrice === "undefined"
           )
             return null;
 
           const configProduct = {
-            ...product
+            ...product,
           };
 
-          return( 
-             <Product {...configProduct} />
-            );
+          return <Product {...configProduct} />;
         })}
       </div>
 
-      {!isLastPage && (
-        <LoadMore {...configLoadMore} />
-      )}
-
-
+      {!isLastPage && <LoadMore {...configLoadMore} />}
     </div>
   );
 };
