@@ -25,7 +25,7 @@ const EmailPassword = props => {
             dispatch(resetUserState());
             history.push('/login');
         }
-    }, [resetPasswordSuccess]);
+    }, [dispatch, history, resetPasswordSuccess]);
 
     useEffect (() => {
         if(Array.isArray(userErr) && userErr.length > 0) {

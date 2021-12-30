@@ -14,7 +14,7 @@ const useAuth = props => {
         if (!currentUser){
             history.push('/login');
         }
-    }, [currentUser]);
+    }, [history, currentUser]);
 
     return currentUser;
 };

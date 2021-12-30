@@ -24,7 +24,7 @@ const SignIn = (props) => {
           resetForm();
           history.push("/");
       }
-  }, [currentUser]);
+  }, [history, currentUser]);
 
   const resetForm = () => {
     setEmail("");

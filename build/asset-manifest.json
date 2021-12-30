@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0d82b707.css",
+    "main.js": "/static/js/main.5267ba2c.js",
+    "static/media/shopWomens.jpg": "/static/media/shopWomens.81fa562460db801f0e20.jpg",
+    "static/media/shopMens.jpg": "/static/media/shopMens.fcf2fa24d2ef7f360408.jpg",
+    "static/media/logo.PNG": "/static/media/logo.747991c772f2aab70eae.PNG",
+    "index.html": "/index.html",
+    "main.0d82b707.css.map": "/static/css/main.0d82b707.css.map",
+    "main.5267ba2c.js.map": "/static/js/main.5267ba2c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0d82b707.css",
+    "static/js/main.5267ba2c.js"
+  ]
+}
